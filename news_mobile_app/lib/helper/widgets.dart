@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ArticleTile extends StatelessWidget {
-  final String imageUrl, title, desc, url;
+  final String imageUrl, title, summary, link, newsRating;
   ArticleTile(
       {@required this.imageUrl,
       @required this.title,
-      @required this.desc,
-      @required this.url});
+      @required this.summary,
+      @required this.link,
+      @required this.newsRating});
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +31,10 @@ class ArticleTile extends StatelessWidget {
             SizedBox(
               height: 8,
             ),
+            Text('Trustworthiness: $newsRating',
+                style: TextStyle(color: Colors.black54)),
             Text(
-              desc,
+              summary,
               style: TextStyle(color: Colors.black54),
             ),
           ],

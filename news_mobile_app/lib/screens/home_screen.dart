@@ -13,7 +13,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<CategoryModel> categories = new List<CategoryModel>();
+  // List<CategoryModel> categories = new List<CategoryModel>();
   List<ArticleModel> articles = new List<ArticleModel>();
 
   bool _loading = true;
@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _loading = true;
     super.initState();
-    categories = getCategories();
+    // categories = getCategories();
     getNews();
   }
 
@@ -65,21 +65,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: <Widget>[
-                    // Categories
-                    Container(
-                      height: 70,
-                      child: ListView.builder(
-                          itemCount: categories.length,
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return CategoryTile(
-                              imageUrl: categories[index].imageUrl,
-                              categoryName: categories[index].categoryName,
-                            );
-                          }),
-                    ),
-
                     // Articles
                     Container(
                       padding: EdgeInsets.only(top: 16),
@@ -89,11 +74,12 @@ class _HomeScreenState extends State<HomeScreen> {
                           physics: ClampingScrollPhysics(),
                           itemBuilder: (context, index) {
                             return ArticleTile(
-                              imageUrl: articles[index].urlToImage,
-                              title: articles[index].title,
-                              desc: articles[index].description,
-                              url: articles[index].url,
-                            );
+                                imageUrl: articles[index].imageUrl,
+                                title: articles[index].title,
+                                summary: articles[index].summary,
+                                link: articles[index].link,
+                                newsRating:
+                                    articles[index].newsRating.toString());
                           }),
                     )
                   ],
@@ -104,48 +90,48 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class CategoryTile extends StatelessWidget {
-  final String imageUrl, categoryName;
-  CategoryTile({this.imageUrl, this.categoryName});
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => CategoryNews(
-                      category: categoryName.toLowerCase(),
-                    )));
-      },
-      child: Container(
-          margin: EdgeInsets.only(right: 16, top: 8),
-          child: Stack(children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(6),
-              child: CachedNetworkImage(
-                imageUrl: imageUrl,
-                width: 120,
-                height: 60,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Container(
-                alignment: Alignment.center,
-                width: 120,
-                height: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6),
-                  color: Colors.black26,
-                ),
-                child: Text(
-                  categoryName,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500),
-                )),
-          ])),
-    );
-  }
-}
+// class CategoryTile extends StatelessWidget {
+//   final String imageUrl, categoryName;
+//   CategoryTile({this.imageUrl, this.categoryName});
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: () {
+//         Navigator.push(
+//             context,
+//             MaterialPageRoute(
+//                 builder: (context) => CategoryNews(
+//                       category: categoryName.toLowerCase(),
+//                     )));
+//       },
+//       child: Container(
+//           margin: EdgeInsets.only(right: 16, top: 8),
+//           child: Stack(children: <Widget>[
+//             ClipRRect(
+//               borderRadius: BorderRadius.circular(6),
+//               child: CachedNetworkImage(
+//                 imageUrl: imageUrl,
+//                 width: 120,
+//                 height: 60,
+//                 fit: BoxFit.cover,
+//               ),
+//             ),
+//             Container(
+//                 alignment: Alignment.center,
+//                 width: 120,
+//                 height: 60,
+//                 decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(6),
+//                   color: Colors.black26,
+//                 ),
+//                 child: Text(
+//                   categoryName,
+//                   style: TextStyle(
+//                       color: Colors.white,
+//                       fontSize: 14,
+//                       fontWeight: FontWeight.w500),
+//                 )),
+//           ])),
+//     );
+//   }
+// }
