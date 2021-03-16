@@ -10,6 +10,9 @@ class News {
     String url = "http://10.0.2.2:8000/feed/belgium";
 
     var response = await http.get(url);
+    // Specify utf-8 encoding because this is not present in the repsonse header
+    // "content-type" and it will use "latin1" by default.
+    response.headers['content-type'] += '; charset=utf-8';
     var jsonData = jsonDecode(response.body);
 
     jsonData.forEach((element) {
